@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ga-gemba"
+version = "0.1.0"
+description = "Genetic algorithm for improving MT output and for generating adversarial examples against MT metrics, including LLM judges (GEMBA)."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["numpy", "sacrebleu>=2.3", "sacremoses", "tqdm"]
+
+[project.optional-dependencies]
+spm = ["sentencepiece"]
+comet = ["unbabel-comet>=2", "torch"]
+gemba = ["openai>=1.0"]
+gemba-upstream = ["openai>=1.0"]  # also needs the upstream `gemba` package installed from its source
+test = ["pytest", "openai>=1.0"]
+
+[project.scripts]
+ga-gemba = "ga_gemba.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ga_gemba*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
